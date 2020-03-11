@@ -4,6 +4,45 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const likes = document.getElementsByClassName('like-glyph');
+const errorDiv = document.getElementById('modal')
+
+function colorHeart(e) {
+  let heart = e.target;
+  // console.log(e.target)
+  mimicServerCall("url")
+  .then(response => {
+    if (heart.className == "activated-heart") {
+      heart.className = "";
+    } else {
+      heart.className = "activated-heart";
+    console.log("hello");
+    }
+    
+  })
+  .catch(error => {
+    errorDiv.className = "";
+    setTimeout(() => {errorDiv.className = "hidden"}, 5000)
+  })
+}
+
+for(const key in likes) {
+  // console.log(likes[key])
+  likes[key].addEventListener("click", colorHeart)
+    
+  
+}
+
+
+// console.log(typeof likes)
+
+// for(const key in likes) {
+//   likes[key].addEventListener("click", () => {
+    
+//     likes[key].style.color = "red";
+//   })
+// }
+
 
 
 
@@ -23,3 +62,7 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
+
+
+
+
