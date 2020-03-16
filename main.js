@@ -2,9 +2,33 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+let heartFilling = {
+  '♡': '♥',
+  '♥': '♡'
+};
 
+let colorShade = {
+  "red" : "",
+  "": "red"
+};
 
+let colorHearts = document.querySelectorAll(".like");
+
+function likeCallback(event) {
+  let heart = event.target;
+  mimicServerCall("bogusUrl")
+  .then(function(serverMessage) {
+    heart.innerText = heartFilling[heart.innerText];
+    heart.style.color = colorShade[heart.style.color];
+  })
+  .catch(function(error) {
+    document.getElementById("modal").className = "";
+  });
+}
+
+for (let emoji of colorHearts) {
+  emoji.addEventListener("click", likeCallback);
+}
 
 
 //------------------------------------------------------------------------------
