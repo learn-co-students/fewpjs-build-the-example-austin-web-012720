@@ -4,6 +4,32 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+let hearts = document.querySelectorAll('.like');
+console.log(hearts);
+for (const heart of hearts){
+  heart.addEventListener('click', like);
+}
+
+function like(event){
+  let heart = event.target;
+  console.log(heart);
+
+  mimicServerCall('url')
+  .then(function(message){
+    console.log(heart.style.color);
+    if(heart.innerText == FULL_HEART){
+      heart.innerText = EMPTY_HEART;
+      heart.style.color = '';
+    } else {
+      heart.innerText = FULL_HEART;
+      heart.style.color = 'red';
+    }
+  })
+  .catch(function(error){
+    alert('Something went wrong!');
+    // console.log(error);
+  })
+}
 
 
 
